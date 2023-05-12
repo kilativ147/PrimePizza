@@ -4,6 +4,7 @@
 
 
 $mw_page: 1300px;
+$color: linear-gradient(92.06deg, #FFDB47 3.15%, #FDCC06 96.53%);
 
 //Основні кнопки та виділення активних сторінок в шапці
 %button_bk {
@@ -18,31 +19,38 @@ $mw_page: 1300px;
   // border: 1px solid orange;
 }
 
-body {
+body{
   font-family: 'Open Sans';
   font-weight: 400;
   height: 100%;
   ////background-color: #999;
   font-size: 16px;
   line-height: 150%; /* 24/16 */
+  color: #262626;
 }
+
 
 .wraper {
   height: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
+  
   @import "_header";
 
   .main {
-    margin-top: 100px; //відступ від шапки
+  margin-top: 100px; //відступ від шапки
     flex: 1 1 auto;
     .main__container {
-      //// display: none;
-    }
+      // display: none;
+    };
+    @import "main/_index";
     @import "main/_promotional";
-    @import "main/form";
+    @import "main/_delivery";
+    @import "main/_about";
+    @import "_form";
   }
-
+  @import "_basket";
   @import "_footer";
 }

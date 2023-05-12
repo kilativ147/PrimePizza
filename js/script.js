@@ -1,3 +1,174 @@
+document.addEventListener('DOMContentLoaded', function () {
+  loadProducts();
+});
+
+function loadProducts() {
+  // fetch('salad.json')
+  //   .then(function(response) {
+  //     if (!response.ok) {
+  //       throw new Error('Failed to load products');
+  //     }
+  //     return response.json();
+  //   })
+  //   .then(function(data) {
+  //     let out = '';
+  //     for (let key in data) {
+  //       out += '<div class="item-flex">';
+  //       out += '<div class="item__image">';
+  //       out += '<img src="' + data[key].image + '" alt="' + data[key].name +' "> ';
+  //       out += '</div>';
+  //       out += '<h3>' + data[key].name + '</h3>';
+  //       out += '<p>' + data[key].description + '</p>';
+  //       out += '<p><span>' + data[key]['price'] + ' грн.</span></p>';
+  //       out += '<button class="item__buy" data-art="' + key + '">Купить</button>';
+  //       out += '</div>';
+  //     }
+  //     document.querySelector('#salad').innerHTML = out;
+  //   })
+  //   .catch(function(error) {
+  //     console.log(error);
+  //   });
+
+  // const array = data.salad;
+  // let out = '';
+  // for (let key in array) {
+  //   out += '<div class="item-flex">';
+  //   out += '<div class="item__image">';
+  //   out += '<img src="' + array[key].image + '" alt="' + array[key].name + '"> ';
+  //   out += '</div>';
+  //   out += '<h3>' + array[key].name + '</h3>';
+  //   out += '<p>' + array[key].description + '</p>';
+  //   out += '<p><span>' + array[key].price + ' грн.</span></p>';
+  //   out += '<button class="item__buy" data-articul="' + key + '"></button>';
+  //   out += '</div>';
+  // }
+  // document.querySelector('#salad .product__items-grid').innerHTML = out;
+
+}
+
+
+fetch('products_list.json')
+  .catch(error => console.error(error))
+  .then(response => response.json())
+  .then(data => {
+    const categories = [data.pizza, data.salad, data.drinks, data.other];
+    for (let category of categories) {
+      console.log(category);
+      for (let key in category) {
+        let item = category[key];
+        const htmlItem = generateProductHTML(key, item);
+
+        let selector = '';
+        if (category === data.pizza) {
+          selector = document.querySelector('#pizza .product__items-grid');
+        }
+        else if (category === data.salad) {
+          selector = document.querySelector('#salad .product__items-grid');
+        }
+        else if (category === data.drinks) {
+          selector = document.querySelector('#drinks .product__items-grid');
+        }
+        else if (category === data.other) {
+          selector = document.querySelector('#other .product__items-grid');
+        }
+        console.log(selector);
+
+        selector.innerHTML += htmlItem;
+
+        // Функція для генерації HTML-коду продукту
+        function generateProductHTML(key, product) {
+          return `
+          <div class="item-flex">
+            <div class="item__image">
+              <img src="${product.image}" alt="${product.name}">
+            </div>
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p><span>${product.price} грн.</span></p>
+            <button type='button' class="item__buy" data-articul="${key}"></button>
+          </div>
+        `;
+        }
+      }
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // //Ініціаізація елементів по завершенню завантаження сторінки
 // document.addEventListener("DOMContentLoaded", function() {
@@ -6,7 +177,7 @@
 // 	for (var i = 0; i < navButtons.length; i++) {
 // 		navButtons[i].addEventListener("click", scrollToTarget);
 // 	}
-		
+
 // 	//Поп ап
 // 	const reqButtons = document.querySelectorAll(".button-request");
 // 	for (var i = 0; i < reqButtons.length; i++) {
@@ -43,14 +214,14 @@
 // 	// console.log(sections[1].getBoundingClientRect().top);
 //   for (let i = 0; i < sections.length; i++) {
 // 		// відстань від верху сторінки до верхньої межі елемента
-//     const sectionTop = sections[i].getBoundingClientRect().top; 
+//     const sectionTop = sections[i].getBoundingClientRect().top;
 //     if (sectionTop < windowPos ) changeColorNav(i);
 //   }
 // }
 // 	//зміна кольору пункту відповідного нав меню
 // const navButtons = document.querySelectorAll(".buttons__navigation");
 // function changeColorNav(index){
-// 	for (var i = 0; i < navButtons.length; i++) { 
+// 	for (var i = 0; i < navButtons.length; i++) {
 // 		if (i === index) {
 // 			navButtons[i].classList.add('_active');
 // 			translateNav(index);
@@ -120,83 +291,81 @@
 // }
 
 
-// const whySlider = new Swiper('.why__container',{
+
 // 	//! клас повинен бути position:relative, но не точно
-// 	//автоматична кількість показаних слайдів
-// 	slidesPerView: 'auto',
+
 // 	//вільний слайд
 // 	freeMode: true,
 // 	//заміна вигляду курсору миші
-// 	grabCursor: true,
+// 	grabCursor: false,
 // });
 
-// const purchaseSlider = new Swiper('.purchase-container',{
-// 	//! клас повинен бути position:relative
-// 	// адаптив
-// 	breakpoints:{
-// 		//Для різних екранів, mobile first
+// const instSlider = new Swiper('.gallety__back', {
+//   // ! клас повинен бути position:relative
+//   // адаптив
+//   //автоматична кількість показаних слайдів
+//   	// slidesPerView: '4',
+//     // slidesPerView: '3',
+//   breakpoints: {
+//     //Для різних екранів, mobile first
 //     320: {
-// 			//кількість видимих слайдів на екрані
-//       slidesPerView: 1,
-// 			//відстань між слайдами
-//       spaceBetween: 10,
+//       //кількість видимих слайдів на екрані
+//       // slidesPerView: auto,
+//       //відстань між слайдами
+//       // spaceBetween: 10,
 //     },
-// 		600: {
+//     600: {
 //       slidesPerView: 1.5,
-//       spaceBetween: 20,
+//       // spaceBetween: 20,
 //     },
-// 		900: {			
-// 			slidesPerView: 2,
-// 			spaceBetween: 50,
-// 		},
-// 		1100: {			
-// 			slidesPerView: 3,
-// 			spaceBetween: 50,
-// 		},
-// 	},
-// 	//можливіть перетаскування мишшю
-// 	simulateTouch: true,
-// 	//чуттєвість до свайпу
-// 	touchRatio: 1,
-// 	//кут спрацювання свайпу
-// 	touchAngle: 45,
-// 	//заміна вигляду курсору миші
-// 	grabCursor: true,
-// 	//скрол
-// 	scrollbar:{
-// 		el: '.swiper-scrollbar',
-// 		draggable: false
-// 	},
-// 	//перелистання при кліку на слайд
-// 	slideToClickedSlide: false,
-// 	//активний слайд по центру
-// 	centeredSlides: false,
-// 	//нескінченний скрол
-// 	loop: false,
-// 	//автопрокртка
-// 	autoplay:{
-// 		//пауза
-// 		delay: 1500,
-// 		//чи закінчиться атвтопрокрутка на останньому слайді
-// 		stopOnLastSlide: false,
-// 		//чи зупиниться автопрокрутка якщо вручну прокрутити
-// 		disableOnInteraction: false,
-// 	},
+//     900: {
+//       slidesPerView: 3.5,
+//       // spaceBetween: 50,
+//     },
+//     1300: {
+//       slidesPerView: 4,
+//       // spaceBetween: 50,
+//     },
+//   },
+//   //можливіть перетаскування мишшю
+//   simulateTouch: false,
+//   //чуттєвість до свайпу
+//   touchRatio: 1,
+//   //кут спрацювання свайпу
+//   touchAngle: 45,
+//   //заміна вигляду курсору миші
+//   grabCursor: false,
+//   //скрол
+//   //перелистання при кліку на слайд
+//   slideToClickedSlide: false,
+//   //активний слайд по центру
+//   centeredSlides: false,
+//   //нескінченний скрол
+//   loop: true,
+//   //автопрокртка
+//   autoplay: {
+//     //пауза
+//     delay: 500,
+//     //чи закінчиться атвтопрокрутка на останньому слайді
+//     stopOnLastSlide: false,
+//     //чи зупиниться автопрокрутка якщо вручну прокрутити
+//     disableOnInteraction: false,
+//   },
 // })
 
 
-// //Розмітка сторінки
-// /*
-// //	 Створюємо новий елемент div
-// var line = document.createElement("div");
-// // 	Додаємо до нього стилі
-// line.style.width = "100%";
-// line.style.height = "1px";
-// line.style.backgroundColor = "green";
-// line.style.position = "fixed";
-// line.style.top = "50%";
-// line.style.left = "0";
-// line.style.marginTop = "-0.5px";
-// // 	Додаємо елемент в DOM дерево
-// document.body.appendChild(line);
-// */
+//Розмітка сторінки
+/*
+//	 Створюємо новий елемент div
+var line = document.createElement("div");
+// 	Додаємо до нього стилі
+line.style.width = "100%";
+line.style.height = "1px";
+line.style.backgroundColor = "green";
+line.style.position = "fixed";
+line.style.top = "50%";
+line.style.left = "0";
+line.style.marginTop = "-0.5px";
+// 	Додаємо елемент в DOM дерево
+document.body.appendChild(line);
+*/

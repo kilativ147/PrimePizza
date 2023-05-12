@@ -1,0 +1,126 @@
+.basket._active {
+  right: 0
+}
+
+.basket {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  z-index: 20;
+  min-width: 350px;
+  max-width: 500px;
+  height: 100%;
+  background-color: #fff;
+  padding: 25px;
+  transition: all 0.2s ease;
+
+  .basket__form {
+    .basket__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      display: block;
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+
+      &::before,
+      &::after {
+        content: '';
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #000;
+      }
+
+      &::before {
+        transform: rotate(-45deg) translateX(-5%);
+      }
+
+      &::after {
+        transform: rotate(45deg) translateX(-5%);
+      }
+    }
+
+
+    h4 {
+      font-size: 24px;
+      line-height: 130%;
+      font-weight: 700;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .basket__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ddd;
+
+      li {
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: 5px;
+        grid-template-columns: 1fr 15px 20px 15px 40px 30px 10px;
+        align-items: center;
+        // align-content: center;
+
+        .item__name {}
+
+        .item__button-less,
+        .item__button-more,
+        .item__button-delete {
+          display: block;
+          width: 15px;
+          height: 15px;
+          background-color: transparent;
+          border-radius: 50%;
+          border: 1px solid #999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .item__count {
+          text-align: center;
+        }
+
+        .item__summ {
+          text-align: right;
+
+          span {}
+        }
+      }
+    }
+
+    .basket__summ {
+      text-align: right;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 120%;
+      margin-bottom: 40px;
+
+      span {}
+    }
+
+    .basket__post {
+      width: 100%;
+      // height: 20px;
+      padding: 15px;
+      background: $color;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 100%;
+      color: #fff;
+      border-radius: 50px;
+    }
+  }
+}

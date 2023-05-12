@@ -1,26 +1,138 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ua">
 
 <head>
-	<title>Prime Pizza</title>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
+	<title>Prime Pizza ⋅ Головна</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="img/icons/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="style_null.css"/> -->
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/> -->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <body>
-	<div class="wrapper-column">
+	<div class="wraper">
 		<header class="header ">
+			<script src='js/import_header.js'></script>
 		</header>
-		<main class="main-column">
+		<main class="main">
+			<article class="greatings">
+				<div class="greatings__back">
+					<img src="img/page_index/greatings__main.png" alt="">
+				</div>
+				<div class="greatings__container">
+					<div class="greatings__content-flex">
+						<div class="greatings__text">
+							<h2>Скуштуй шматочок піци, а потім, ще і ще і ще... </h2>
+							<p>Сумніваєшся яку обрати - тицяй на піцу та крути колесо </p>
+						</div>
+						<div class="greatings__pizza">
+								<img src="img/page_index/greatings__pizza.png" alt="">
+						</div>
+					</div>
+				</div>
+			</article>
+			<section class="main__container">
+				<article class="products">
+					<div class="products__category">
+						<a href="#pizza">Піца</a>
+						<a href="#salad">Салат</a>
+						<a href="#drinks">Напої</a>
+						<a href="#other">Інше</a>
+					</div>
+					<div class="products__list">
+						<div id='pizza' 	class="product__body">
+							<div class="product__items-grid"></div>
+						</div>
+						<div id='salad'	class="product__body">
+							<div class="product__items-grid"></div>
+						</div>
+						<div id='drinks'	class="product__body">
+							<div class="product__items-grid"></div>
+						</div>
+						<div id='other'	class="product__body">
+							<div class="product__items-grid"></div>
+						</div>
+					</div>
+				</article>
+				
+				<article class="gallery">
+					<div class="gallery__content">
+						<div class="gallety__back">
+							<div class="gallery__back-flex">
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_5.png" alt="gallery5">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_6.png" alt="gallery6">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_1.png" alt="gallery1">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_2.png" alt="gallery2">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_3.png" alt="gallery3">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_4.png" alt="gallery4">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_5.png" alt="gallery5">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_6.png" alt="gallery6">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_1.png" alt="gallery1">
+								</div>
+								<div class="gallery__back-img">
+									<img src="img/page_index/gallery_INST_2.png" alt="gallery2">
+								</div>
+							</div>
+						</div>
+						<div class="gallery__label label">
+							<div class="label__border">
+								<div class="label__content">
+									<div>
+										<img src="img/icons/Instagram_White.svg" alt="">
+									</div>
+									<a href="http://instagram.com">@primepizza.if</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</article>
+			</section>
+
+			<article class="main__form">
+				<script src='/js/import_form.js'></script>
+			</article>
 		</main>
-		<footer id='contacts'class="footer ">	
+		<aside class="basket">
+			<form action="" class="basket__form">
+				<button type='button' class="basket__close"><span></span></button>
+				<h4>Ваше замовлення</h4>
+				<ul class="basket__list">
+					<li>
+						<p class="item__name">Бульйон</p>
+						<button type='button' class="item__button-less">-</button>
+						<p class="item__count">3</p>
+						<button type='button' class="item__button-more">+</button>
+						<p class="item__summ">285</p><span> грн.</span>
+						<button type='button' class="item__button-delete">X</button>
+					</li>
+				</ul>
+				<div class="basket__summ">сума: <span>285</span> грн.</div>
+				<button class="basket__post">Підтвердити замовлення</button>
+			</form>
+		</aside>
+		<footer class="footer ">
+			<script src='/js/import_footer.js'></script>
 		</footer>
 	</div>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> -->
-	<script src='script.js'></script>
+	<script src='js/script.js'></script>
 </body>
+
 </html>

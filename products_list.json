@@ -1,0 +1,161 @@
+{
+  "pizza":{
+    "0000":{
+      "name": "4 сири",
+      "image": "img/page_index/products/0_0.png",
+      "description": "Вершки, моцарелла, дорблю, королівський, пармезан",
+      "price": 189
+    },
+    "0001":{
+      "name": "4 м'яса",
+      "image": "img/page_index/products/0_1.png",
+      "description": "Пелаті, моцарелла, шинка, салямі, мисливські ковбаски, підчеревина",
+      "price": 199
+    },
+    "0002":{
+      "name": "4 сезони",
+      "image": "img/page_index/products/0_2.png",
+      "description": "Пелаті, моцарелла, салямі, печериці, болгарський перець, кукурудза",
+      "price": 209
+    },
+    "0003":{
+      "name": "Веганська",
+      "image": "img/page_index/products/0_3.png",
+      "description": "Пелаті, броколі, печериці, чері, червона цибуля, чилі",
+      "price": 169
+    },
+    "0004":{
+      "name": "Гавайська",
+      "image": "img/page_index/products/0_4.png",
+      "description": "Вершки, моцарелла, шинка, ананас, кукурудза",
+      "price": 179
+    },
+    "0005":{
+      "name": "Гостріше гострого",
+      "image": "img/page_index/products/0_5.png",
+      "description": "Пелаті, моцарелла, салямі, чилі, мед",
+      "price": 189
+    },
+    "0006":{
+      "name": "З лососем",
+      "image": "img/page_index/products/0_6.png",
+      "description": "Вершки, моцарелла, лосось, шпинат, чері, пармезан",
+      "price": 209
+    },
+    "0007":{
+      "name": "З тунцем",
+      "image": "img/page_index/products/0_7.png",
+      "description": "Пелаті, моцарелла, тунець, червона цибуля, оливки",
+      "price": 209
+    },
+    "0008":{
+      "name": "З шпинатом",
+      "image": "img/page_index/products/0_8.png",
+      "description": "Верши, моцарелла, шпинат, чері",
+      "price": 169
+    },
+    "0009":{
+      "name": "Капрічоза",
+      "image": "img/page_index/products/0_9.png",
+      "description": "Пелаті, моцарелла, шинка, печериці, оливки",
+      "price": 199
+    }
+  },
+  "salad": {
+    "0100" : {
+      "name": "Салат Грецький",
+      "image": "img/page_index/products/1_0.png",
+      "description": "Мікс салату, помідор, огірок, перець болгарський, сир фета, оливки, цибуля синя",
+      "price": 79
+    },
+    "0101":{
+      "name": "Салат Цезар з куркою",
+      "image": "img/page_index/products/1_1.png",
+      "description": "Мікс салату, курка, сухарики, помідор, перепелине яйце",
+      "price": 97
+    }
+  },
+  "drinks":{
+    "0200":{
+      "name": "Coca-cola 0.33л",
+      "image": "img/page_index/products/2_0.png",
+      "description": "",
+      "price": 33
+    },
+    "0201":{
+      "name": "Coca-cola 0.5л",
+      "image": "img/page_index/products/2_1.png",
+      "description": "",
+      "price": 37
+    },
+    "0202":{
+      "name": "Coca-cola 1л",
+      "image": "img/page_index/products/2_2.png",
+      "description": "",
+      "price": 49
+    },
+    "0203":{
+      "name": "Coca-cola 2л",
+      "image": "img/page_index/products/2_3.png",
+      "description": "",
+      "price": 69
+    },
+    "0204":{
+      "name": "Соки Rick 0.5л",
+      "image": "img/page_index/products/2_4.png",
+      "description": "",
+      "price": 45
+    },
+    "0205":{
+      "name": "Соки Rick 1л",
+      "image": "img/page_index/products/2_4.png",
+      "description": "",
+      "price": 69
+    }
+  },
+  "other":{
+    "0300":{
+      "name": "Бульйон",
+      "image": "img/page_index/products/3_0.png",
+      "description": "",
+      "price": 69
+    },
+    "0301":{
+      "name": "Картопля фрі",
+      "image": "img/page_index/products/3_1.png",
+      "description": "",
+      "price": 65
+    },
+    "0302":{
+      "name": "Курячі крильця",
+      "image": "img/page_index/products/3_2.png",
+      "description": "",
+      "price": 126
+    },
+    "0303":{
+      "name": "Нагетси",
+      "image": "img/page_index/products/3_3.png",
+      "description": "",
+      "price": 79
+    },
+    "0304":{
+      "name": "Соус часниковий",
+      "image": "img/page_index/products/3_4.png",
+      "description": "",
+      "price": 20
+    },
+    "0305":{
+      "name": "Соус Цезар",
+      "image": "img/page_index/products/3_5.png",
+      "description": "",
+      "price": 20
+    },
+    "0306":{
+      "name": "Кетчуп",
+      "image": "img/page_index/products/3_6.png",
+      "description": "",
+      "price": 12
+    }
+  }
+}
+

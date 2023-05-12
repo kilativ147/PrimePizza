@@ -1,0 +1,40 @@
+
+								<div class="item-flex">
+									<div class="item__image">
+										<img src="img/page_index/products/1_0.jpg" alt="Грецький">
+									</div>
+									<h3>Салат Грецький</h3>
+									<p>Мікс салату, помідор, огірок, перець болгарський, сир фета, оливки, цибуля синя</p>
+									<p><span>79 грн</span></p>
+									<button data-param='1.0' data-price='79' class="item__buy">
+									</button>
+								</div>
+
+								<div class="item-flex">
+									<div class="item__image">
+										<img src="img/page_index/products/1_1.jpg" alt="Цезар">
+									</div>
+									<h3>Салат Цезар з куркою</h3>
+									<p>Мікс салату, курка, сухарики, помідор, перепелине яйце</p>
+									<p><span>97 грн</span></p>
+									<button data-param='1.1' data-price='97' class="item__buy">
+									</button>
+								</div>
+
+
+{
+  "salad": {
+    "0100" : {
+      "name": "Салат Грецький",
+    },
+    "0101":{
+      "name": "Салат Цезар з куркою",
+    }
+  },
+  "pizza":{
+    "0000":{
+      "name": "Піца",
+    }
+  }
+}
+

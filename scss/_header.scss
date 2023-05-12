@@ -19,7 +19,7 @@
     position: relative;
     height: 100%;
 
-    .header__logo {
+    .header__logo-mob {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -28,69 +28,16 @@
       width: 250px;
       padding: 0px 20px;
 
+      @media (min-width:801px) {
+        display: none;
+      }
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-
-      @media (max-width:800px) {
-        left: 45%;
-        // left: clamp(40%, 45vw, 50%);
-      }
     }
-
-    .header__content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
-
-      .header__nav {
-        flex: 1 1;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 10px;
-        text-align: center;
-        align-items: center;
-        justify-content: space-evenly;
-
-        a {
-          // flex: 1 1;
-          padding: 5px 20px;
-
-          &:hover {
-            @extend %button_bk;
-          }
-        }
-      }
-
-      .header__empty {
-        flex: 0 0 250px;
-      }
-
-      .header__adress {
-        flex: 1 1;
-        padding-left: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 20px;
-        row-gap: 10px;
-
-        >div {
-          margin: 0;
-          // padding: 0 20px;
-          display: flex;
-          gap: 10px;
-        }
-
-      }
-
-      @media (max-width:800px) {
-        display: none;
-      }
-    }
-
     .header__burger {
       width: 50px;
       height: 30px;
@@ -158,5 +105,57 @@
         transform: translate(0, -50%);
       }
     }
+
+    .header__content {
+      display: grid;
+      grid-template-columns: 1fr 250px 1fr;
+      align-items: center;
+      height: 100%;
+
+      .header__nav {
+        flex: 1 1;
+        display: grid;
+        text-align: center;
+        grid-template-columns: repeat(3, auto);
+        align-items: center;
+        justify-items: center;
+        
+        a {
+          padding: 5px 20px;
+          white-space: nowrap;
+
+          &:hover {
+            @extend %button_bk;
+          }
+        }
+      }
+
+      .header__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .header__adress {
+        flex: 1 1;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 20px;
+        row-gap: 10px;
+
+        >div {
+          margin: 0;
+          display: flex;
+          gap: 10px;
+        }
+
+      }
+
+      @media (max-width:800px) {
+        display: none;
+      }
+    }
+
+   
   }
 }
