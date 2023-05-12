@@ -79,6 +79,7 @@
   position: relative;
 
   .products {
+    padding-bottom: 50px;
     .products__category {
       max-width: 770px;
       margin: 0 auto;
@@ -89,7 +90,8 @@
       grid-row-gap: 20px;
 
 
-      a {
+      .products__category-button {
+        padding: 5px 20px;
         text-align: center;
         font-size: 24px;
         line-height: 60px; //відповідно висоті контейнеру
@@ -97,8 +99,11 @@
         height: 100%;
         border-radius: 50px;
         background: #ECEFF5;
+        cursor: pointer;
 
-        &:hover {
+         
+        
+        &:hover,&._activeButton {
           background: $color;
           color: #fff;
           font-weight: 700;
@@ -110,9 +115,9 @@
     .products__list {
       .product__body {
         display: none;
-        padding-bottom: 60px;
 
-        &:target {
+        
+        &._activeCategory {
           display: block;
         }
 

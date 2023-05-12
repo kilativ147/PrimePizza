@@ -1,111 +1,289 @@
+//Список картини
+var cartList = {}
+var cartListPrice = {}
+
 document.addEventListener('DOMContentLoaded', function () {
   loadProducts();
+  funcTabCategory(0);
+  checkCart();
+  updCartCount();
 });
 
 function loadProducts() {
-  // fetch('salad.json')
-  //   .then(function(response) {
-  //     if (!response.ok) {
-  //       throw new Error('Failed to load products');
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(function(data) {
-  //     let out = '';
-  //     for (let key in data) {
-  //       out += '<div class="item-flex">';
-  //       out += '<div class="item__image">';
-  //       out += '<img src="' + data[key].image + '" alt="' + data[key].name +' "> ';
-  //       out += '</div>';
-  //       out += '<h3>' + data[key].name + '</h3>';
-  //       out += '<p>' + data[key].description + '</p>';
-  //       out += '<p><span>' + data[key]['price'] + ' грн.</span></p>';
-  //       out += '<button class="item__buy" data-art="' + key + '">Купить</button>';
-  //       out += '</div>';
-  //     }
-  //     document.querySelector('#salad').innerHTML = out;
-  //   })
-  //   .catch(function(error) {
-  //     console.log(error);
-  //   });
+  //Data Extract from JSON file to complite items list
+  fetch('products_list.json') //inicialization JSON file
+    .catch(error => console.error(error)) //check for errors (exsisting file)
+    .then(response => response.json()) //% appeal to element and collect answer (вірогідно, але команда обов'язкова)
+    .then(data => { //Data obj is create to whitch the obj of JSON are assigned
+      const categories = [data.pizza, data.salad, data.drinks, data.other]; //array with all objects inside the json file(obj data)
+      for (let category of categories) { //check all of obj inside data
+        for (let key in category) { //check all of keys insile every obj
+          let item = category[key];  //Create element to share it into building function
+          const htmlItem = generateProductHTML(key, item); //Creating and writing element to a variable for furher assignment 
 
-  // const array = data.salad;
-  // let out = '';
-  // for (let key in array) {
-  //   out += '<div class="item-flex">';
-  //   out += '<div class="item__image">';
-  //   out += '<img src="' + array[key].image + '" alt="' + array[key].name + '"> ';
-  //   out += '</div>';
-  //   out += '<h3>' + array[key].name + '</h3>';
-  //   out += '<p>' + array[key].description + '</p>';
-  //   out += '<p><span>' + array[key].price + ' грн.</span></p>';
-  //   out += '<button class="item__buy" data-articul="' + key + '"></button>';
-  //   out += '</div>';
-  // }
-  // document.querySelector('#salad .product__items-grid').innerHTML = out;
+          let selector = ''; // Selector to witch the created an item will then added
+          if (category === data.pizza) { //Check the category of the obj
+            selector = document.querySelector('#pizza .product__items-grid');
+          }
+          else if (category === data.salad) {
+            selector = document.querySelector('#salad .product__items-grid');
+          }
+          else if (category === data.drinks) {
+            selector = document.querySelector('#drinks .product__items-grid');
+          }
+          else if (category === data.other) {
+            selector = document.querySelector('#other .product__items-grid');
+          }
+          selector.innerHTML += htmlItem; //Adding a created object to a specific selector
+
+          // Функція для генерації HTML-коду продукту
+          function generateProductHTML(key, product) {
+            return `
+            <div class="item-flex">
+              <div class="item__image">
+                <img src="${product.image}" alt="${product.name}">
+              </div>
+              <h3>${product.name}</h3>
+              <p>${product.description}</p>
+              <p><span>${product.price} грн.</span></p>
+              <button type='button' class="item__buy" data-articul="${key}"></button>
+            </div>
+            `;
+          }
+
+        }
+      }
+      //Додаємо обробникик подій для подальшої добавки елементів до корзини
+      //список батьківських елементів кнопок
+      const itemList = document.querySelectorAll('.product__items-grid');
+      itemList.forEach(element => {
+        element.addEventListener('click', (event) => {
+          //якщо клікнуто на дочірній елемент який є кнопкою корзини - передача ідентифікатору
+          if (event.target.classList.contains('item__buy')) {
+            const id = event.target.getAttribute('data-articul');
+            addToCart(id);
+          }
+        })
+      })
+    });
+}
+
+//Показ категорій
+const butCategory = document.querySelectorAll('.products__category-button');
+// Додаємо обробник події "click" для кожної кнопки
+butCategory.forEach(button => {
+  button.addEventListener('click', () => {
+    // Видаляємо клас "_activeButton" у всіх кнопок
+    butCategory.forEach(button => {
+      button.classList.remove('_activeButton');
+    });
+    // Додаємо клас "_activeButton" до клікнутої кнопки
+    button.classList.add('_activeButton');
+    let activeCategory = Array.from(butCategory).findIndex((element) => element.classList.contains('_activeButton'));
+    console.log(activeCategory);
+    funcTabCategory(activeCategory);
+  });
+});
+
+//Показ товарів
+const tabCategory = document.querySelectorAll('.product__body');
+function funcTabCategory(ind) {
+  tabCategory.forEach(category => {
+    category.classList.remove('_activeCategory')
+  })
+  tabCategory[ind].classList.add('_activeCategory');
+}
+
+
+
+//Корзина
+//кнопка корзини
+const basketBut = document.querySelector('.basket__cart');
+//меню корзини
+const basketMenu = document.querySelector('.basket');
+//кнопка закриття корзини
+const basketClose = document.querySelector('.basket__close');
+
+//Відкриваємо меню
+basketBut.addEventListener('click', () => {
+  basketMenu.classList.add('_activeBasket');
+  updBasketList();
+})
+//Закриваємо меню кнопкою
+basketClose.addEventListener('click', () => {
+  basketMenu.classList.remove('_activeBasket');
+})
+
+//Закриваємо кліком поза корзини
+document.addEventListener('click', (event) => {
+  // Перевіряємо, чи клікнуто на елементі з класом "basket" або кнопці корзини
+  if (!event.target.closest('.basket') && !event.target.closest('.basket__cart') && !event.target.closest('.basket__item-button')) {
+    basketMenu.classList.remove('_activeBasket');
+  }
+
+
+});
+
+//Робота корзини
+function addToCart(id) {
+  if (cartList[id] != undefined && cartListPrice[id] != undefined) {
+    cartList[id]++;
+    cartListPrice[id] = '';
+  } else {
+    cartList[id] = 1;
+    cartListPrice[id] = '';
+  }
+  localStorage.setItem('cartList', JSON.stringify(cartList));
+  updCartCount();
+  console.log(cartList);
+}
+
+//Оновлення лічильника в корзини
+const cart = document.querySelector('.basket__cart');
+const cartCount = document.querySelector('.cart__count');
+const updCartCount = () => {
+  let totalQuantity = Object.keys(cartList).reduce((total, key) => {
+    return total + cartList[key];
+  }, 0);
+  // cartCount.innerText = Object.keys(cartList).length; //Виводить кількість елементів в масиві
+  cartCount.innerText = totalQuantity;
+  if (Object.keys(cartList).length <= 0) {
+    basketMenu.classList.remove('_activeBasket');
+  }
+  if (totalQuantity > 0) {
+    if (!cart.classList.contains('_activeCard')) cart.classList.add('_activeCard');
+  }  else cart.classList.remove('_activeCard');
+};
+
+
+function checkCart() {
+  if (localStorage.getItem('cartList') != undefined) {
+    cartList = JSON.parse(localStorage.getItem('cartList'));
+  }
+  firstUpdateBasketMenu();
+}
+
+function firstUpdateBasketMenu() {
+  let basketList = document.querySelector('.basket__list')
+
+  //Додаємо обробникик подій для подальшої добавки елементів до корзини
+  //список батьківських елементів кнопок
+  basketList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('basket__item-button')) {
+      //якщо клікнуто на дочірній елемент який є кнопкою
+      let id = event.target.getAttribute('data-articul');
+      if (event.target.classList.contains('-minus')) {
+        basketItemPlus(id, 'minus');
+      }
+      else if (event.target.classList.contains('-plus')) {
+        basketItemPlus(id, 'plus');
+      }
+      else if (event.target.classList.contains('-delete')) {
+        basketItemPlus(id, 'delete');
+      }
+    }
+  });
+  updBasketList();
+}
+
+function updBasketList() {
+  let basketList = document.querySelector('.basket__list')
+  let basketSum = document.querySelector('.basket__summ span')
+  //Очищення данних
+  basketList.innerHTML = '';
+  basketSum.innerText = '0';
+
+  buildBasketHTNL()
+}
+
+function buildBasketHTNL() {
+  fetch('products_list.json') //inicialization JSON file
+    .catch(error => console.error(error)) //check for errors (exsisting file)
+    .then(response => response.json()) //% appeal to element and collect answer (вірогідно, але команда обов'язкова)
+    .then(data => { //Data obj is create to whitch the obj of JSON are assigned
+      let basketSumm = 0;
+      for (let item in cartList) {
+        //ідеинтифікатор + кількість
+        //console.log(item + ' --- ' + cartList[item]);
+        let searchId = item;
+        let count = cartList[item];
+        const categories = [data.pizza, data.salad, data.drinks, data.other]; //array with all objects inside the json file(obj data)
+        for (let category of categories) { //check all of obj inside data
+          for (let key in category) { //check all of keys insile every obj
+            if (key === searchId) {
+              let item = category[key];  //Create element to share it into building function
+              let itemSum = item.price * count;
+              basketSumm += itemSum;
+              const htmlItem = generateProductHTML(key, item, count, itemSum); //Creating and writing element to a variable for furher assignment 
+
+              let selector = document.querySelector('.basket__list');
+              selector.innerHTML += htmlItem; //Adding a created object to a specific selector
+
+              // Функція для генерації HTML-коду продукту
+              function generateProductHTML(key, item, count, itemSum) {
+                return `
+                <li>
+                  <p class="item__name">${item.name}</p>
+                  <button type='button' data-articul="${key}" class="basket__item-button -minus">-</button>
+                  <p class="item__count">${count}</p>
+                  <button type='button' data-articul="${key}" class="basket__item-button -plus">+</button>
+                  <p class="item__summ">${itemSum}</p><span> грн.</span>
+                  <button type='button' data-articul="${key}" class="basket__item-button -delete">&#215;</button>
+                </li>
+                `;
+              }
+            }
+          }
+        }
+      }
+
+      let basketSumText = document.querySelector('.basket__summ span');
+      basketSumText.innerText = basketSumm;
+    });
+}
+
+
+function basketItemPlus(id, operation) {
+  if (operation === 'plus') cartList[id]++;
+  if (operation === 'minus') cartList[id]--;
+  if (operation === 'delete' || cartList[id] <= 0 || cartList[id] === null) {
+    delete cartList[id];
+    updCartCount();
+
+  }
+
+
+
+  updBasketList();
+  localStorage.setItem('cartList', JSON.stringify(cartList));
+  console.log(cartList);
+}
+
+function checkSumm(checkId) {
 
 }
 
 
-fetch('products_list.json')
-  .catch(error => console.error(error))
-  .then(response => response.json())
-  .then(data => {
-    const categories = [data.pizza, data.salad, data.drinks, data.other];
-    for (let category of categories) {
-      console.log(category);
-      for (let key in category) {
-        let item = category[key];
-        const htmlItem = generateProductHTML(key, item);
 
-        let selector = '';
-        if (category === data.pizza) {
-          selector = document.querySelector('#pizza .product__items-grid');
-        }
-        else if (category === data.salad) {
-          selector = document.querySelector('#salad .product__items-grid');
-        }
-        else if (category === data.drinks) {
-          selector = document.querySelector('#drinks .product__items-grid');
-        }
-        else if (category === data.other) {
-          selector = document.querySelector('#other .product__items-grid');
-        }
-        console.log(selector);
 
-        selector.innerHTML += htmlItem;
 
-        // Функція для генерації HTML-коду продукту
-        function generateProductHTML(key, product) {
-          return `
-          <div class="item-flex">
-            <div class="item__image">
-              <img src="${product.image}" alt="${product.name}">
-            </div>
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <p><span>${product.price} грн.</span></p>
-            <button type='button' class="item__buy" data-articul="${key}"></button>
-          </div>
-        `;
-        }
-      }
-    }
-  });
+// let basketItemButtons = document.querySelector('.basket__list');
+//       basketItemButtons.addEventListener('mouseup', (event) => {
+//         if (event.target.classList.contains('basket__item-button')) {
+//           //якщо клікнуто на дочірній елемент який є кнопкою
+//           let id = event.target.getAttribute('data-articul');
+//           if (event.target.classList.contains('-minus')) {
+//             basketItemPlus(id);
+//           }
+//         }
+//       })
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+// const basketItemPlus = id => {
+//   cartList[id]+=1;
+// }
 
 
 
@@ -231,26 +409,6 @@ fetch('products_list.json')
 // 	}
 // };
 
-// 	//переміщення шкали нав - активним меню по центру сторінки
-// const navMenu = document.querySelector('.wrapper-buttons');
-// function translateNav(ind){
-// 	/*
-// 	! Працює з глюками
-// 	const windowHeight = window.innerHeight / 2; // Центр вікна браузера
-// 	const activeButton = navButtons[ind]; //активний елемент
-// 	const buttonRect = activeButton.getBoundingClientRect().top; //висота активного елементу
-// 	console.log(buttonRect);
-// 	const translateY = windowHeight - buttonRect;
-// 	console.log(translateY);
-// 	*/
-
-// 	// отримуємо елемент buttons__container
-// 	const containerElement = document.querySelector('.buttons__container');
-// 	// змінюємо значення translateY для батьківського елемента
-// 	var translateY = 110 - (55 * ind);
-// 	containerElement.style.transform = `rotate(90deg) translate(${translateY}px, 115px)`;
-
-// }
 
 
 // //Анiмацiя появи слайдів
@@ -290,68 +448,6 @@ fetch('products_list.json')
 // 	}
 // }
 
-
-
-// 	//! клас повинен бути position:relative, но не точно
-
-// 	//вільний слайд
-// 	freeMode: true,
-// 	//заміна вигляду курсору миші
-// 	grabCursor: false,
-// });
-
-// const instSlider = new Swiper('.gallety__back', {
-//   // ! клас повинен бути position:relative
-//   // адаптив
-//   //автоматична кількість показаних слайдів
-//   	// slidesPerView: '4',
-//     // slidesPerView: '3',
-//   breakpoints: {
-//     //Для різних екранів, mobile first
-//     320: {
-//       //кількість видимих слайдів на екрані
-//       // slidesPerView: auto,
-//       //відстань між слайдами
-//       // spaceBetween: 10,
-//     },
-//     600: {
-//       slidesPerView: 1.5,
-//       // spaceBetween: 20,
-//     },
-//     900: {
-//       slidesPerView: 3.5,
-//       // spaceBetween: 50,
-//     },
-//     1300: {
-//       slidesPerView: 4,
-//       // spaceBetween: 50,
-//     },
-//   },
-//   //можливіть перетаскування мишшю
-//   simulateTouch: false,
-//   //чуттєвість до свайпу
-//   touchRatio: 1,
-//   //кут спрацювання свайпу
-//   touchAngle: 45,
-//   //заміна вигляду курсору миші
-//   grabCursor: false,
-//   //скрол
-//   //перелистання при кліку на слайд
-//   slideToClickedSlide: false,
-//   //активний слайд по центру
-//   centeredSlides: false,
-//   //нескінченний скрол
-//   loop: true,
-//   //автопрокртка
-//   autoplay: {
-//     //пауза
-//     delay: 500,
-//     //чи закінчиться атвтопрокрутка на останньому слайді
-//     stopOnLastSlide: false,
-//     //чи зупиниться автопрокрутка якщо вручну прокрутити
-//     disableOnInteraction: false,
-//   },
-// })
 
 
 //Розмітка сторінки

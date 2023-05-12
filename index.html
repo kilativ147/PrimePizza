@@ -34,10 +34,10 @@
 			<section class="main__container">
 				<article class="products">
 					<div class="products__category">
-						<a href="#pizza">Піца</a>
-						<a href="#salad">Салат</a>
-						<a href="#drinks">Напої</a>
-						<a href="#other">Інше</a>
+						<a class="products__category-button _activeButton">Піца</a>
+						<a class="products__category-button">Салат</a>
+						<a class="products__category-button">Напої</a>
+						<a class="products__category-button">Інше</a>
 					</div>
 					<div class="products__list">
 						<div id='pizza' 	class="product__body">
@@ -110,6 +110,12 @@
 				<script src='/js/import_form.js'></script>
 			</article>
 		</main>
+		<aside class="basket__cart">
+			<div class="cart__image">
+				<!-- <img src="img/icons/main_product_item_buy.svg" alt="Корзина"> -->
+			</div>
+			<div class="cart__count">88</div>
+		</aside>
 		<aside class="basket">
 			<form action="" class="basket__form">
 				<button type='button' class="basket__close"><span></span></button>
@@ -117,11 +123,11 @@
 				<ul class="basket__list">
 					<li>
 						<p class="item__name">Бульйон</p>
-						<button type='button' class="item__button-less">-</button>
-						<p class="item__count">3</p>
-						<button type='button' class="item__button-more">+</button>
-						<p class="item__summ">285</p><span> грн.</span>
-						<button type='button' class="item__button-delete">X</button>
+						<button type='button' data-articul="0300" class="basket__item-button -minus">-</button>
+						<p class="item__count">5</p>
+						<button type='button' data-articul="0300" class="basket__item-button -plus">+</button>
+						<p class="item__summ">Багато</p><span> грн.</span>
+						<button type='button' data-articul="0300" class="basket__item-button -delete">&#215;</button>
 					</li>
 				</ul>
 				<div class="basket__summ">сума: <span>285</span> грн.</div>

@@ -1,28 +1,86 @@
-.basket._active {
-  right: 0
+.basket__cart {
+  position: fixed;
+  top: 20%;
+  right: calc(0% + 30px);
+  z-index: 19;
+  width: 75px;
+  height: 75px;
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &._activeCard {
+    opacity: 1;
+  }
+
+  .cart__image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    box-shadow: 0px 0px 20px rgba(147, 158, 180, 0.5);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1) url('../img/icons/main_product_item_buy.svg') center/ 40% no-repeat;
+    transition: all 0.2s cubic-bezier(0, 1, 1, 1);
+
+    &:hover {
+      width: 110%;
+      height: 110%;
+      // box-shadow: 0px 0px 20px rgba(255, 219, 71, 0.5);
+      // background: #FDCC06 url('../img/icons/main_product_item_buy-hover.svg') center/ 40% no-repeat;
+    }
+  }
+
+  .cart__count {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 25px;
+    font-weight: 600;
+    text-align: center;
+    background: #fdd01c;
+    box-shadow: 0px 0px 20px rgba(147, 158, 180, 0.5);
+    border-radius: 50%;
+  }
 }
 
 .basket {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: -50%;
   z-index: 20;
   min-width: 350px;
   max-width: 500px;
   height: 100%;
   background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(147, 158, 180, 0.5);
   padding: 25px;
-  transition: all 0.2s ease;
+  transition: all 1s ease;
+
+  &._activeBasket {
+    right: 0;
+    transition: all 0.35s ease;
+    // transition: all 3s ease;
+  }
 
   .basket__form {
     .basket__close {
       position: absolute;
-      top: 20px;
+      top: 30px;
       right: 20px;
       z-index: 2;
       display: block;
-      width: 40px;
-      height: 40px;
+      width: 25px;
+      height: 25px;
       background-color: transparent;
 
       &::before,
@@ -38,11 +96,11 @@
       }
 
       &::before {
-        transform: rotate(-45deg) translateX(-5%);
+        transform: rotate(-45deg) translateX(-10%);
       }
 
       &::after {
-        transform: rotate(45deg) translateX(-5%);
+        transform: rotate(45deg) translateX(-10%);
       }
     }
 
@@ -73,11 +131,11 @@
         align-items: center;
         // align-content: center;
 
-        .item__name {}
+        .item__name {
+          text-overflow: ellipsis;
+        }
 
-        .item__button-less,
-        .item__button-more,
-        .item__button-delete {
+        .basket__item-button {
           display: block;
           width: 15px;
           height: 15px;
