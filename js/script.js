@@ -2,6 +2,8 @@
 var cartList = {}
 var cartListPrice = {}
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
   loadProducts();
   funcTabCategory(0);
@@ -242,7 +244,6 @@ function buildBasketHTNL() {
     });
 }
 
-
 function basketItemPlus(id, operation) {
   if (operation === 'plus') cartList[id]++;
   if (operation === 'minus') cartList[id]--;
@@ -251,40 +252,10 @@ function basketItemPlus(id, operation) {
     updCartCount();
 
   }
-
-
-
   updBasketList();
   localStorage.setItem('cartList', JSON.stringify(cartList));
   console.log(cartList);
 }
-
-function checkSumm(checkId) {
-
-}
-
-
-
-
-
-// let basketItemButtons = document.querySelector('.basket__list');
-//       basketItemButtons.addEventListener('mouseup', (event) => {
-//         if (event.target.classList.contains('basket__item-button')) {
-//           //якщо клікнуто на дочірній елемент який є кнопкою
-//           let id = event.target.getAttribute('data-articul');
-//           if (event.target.classList.contains('-minus')) {
-//             basketItemPlus(id);
-//           }
-//         }
-//       })
-
-
-
-
-// const basketItemPlus = id => {
-//   cartList[id]+=1;
-// }
-
 
 
 

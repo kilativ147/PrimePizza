@@ -1,6 +1,6 @@
 .basket__cart {
   position: fixed;
-  top: 20%;
+  top: 30%;
   right: calc(0% + 30px);
   z-index: 19;
   width: 75px;
@@ -56,7 +56,7 @@
 .basket {
   position: fixed;
   top: 0;
-  right: -50%;
+  right: -500px;
   z-index: 20;
   min-width: 350px;
   max-width: 500px;
@@ -72,37 +72,41 @@
     // transition: all 3s ease;
   }
 
-  .basket__form {
-    .basket__close {
-      position: absolute;
-      top: 30px;
-      right: 20px;
-      z-index: 2;
+  .basket__close {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    z-index: 2;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+
+    &::before,
+    &::after {
+      content: '';
+      position: relative;
+      top: 0;
+      left: 0;
       display: block;
-      width: 25px;
-      height: 25px;
-      background-color: transparent;
-
-      &::before,
-      &::after {
-        content: '';
-        position: relative;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: #000;
-      }
-
-      &::before {
-        transform: rotate(-45deg) translateX(-10%);
-      }
-
-      &::after {
-        transform: rotate(45deg) translateX(-10%);
-      }
+      width: 100%;
+      height: 3px;
+      background-color: #000;
     }
+
+    &::before {
+      transform: rotate(-45deg) translateX(-10%);
+    }
+
+    &::after {
+      transform: rotate(45deg) translateX(-10%);
+    }
+  }
+
+  .basket__form {
+    // height: 100%;
+    // display: grid;
+    // grid-template-rows: 75px 1fr 40px 50px;
 
 
     h4 {
@@ -115,6 +119,8 @@
     }
 
     .basket__list {
+      // overflow-y: scroll;
+      // overflow-x: hidden;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -132,7 +138,8 @@
         // align-content: center;
 
         .item__name {
-          text-overflow: ellipsis;
+          // max-width: 100px;
+          // text-overflow: ellipsis;
         }
 
         .basket__item-button {

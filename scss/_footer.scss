@@ -9,16 +9,6 @@ $mob_width: 800px;
 
   .footer__container {
     padding: 0 20px;
-    .footer__up {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-
-      .footer__buttonup {
-        display: block;
-        background-color: rgba(0,0,0,0);
-      }
-    }
 
     .footer__content {
       display: flex;
@@ -32,6 +22,26 @@ $mob_width: 800px;
         display: flex;
         padding-left: 50px;
         gap: 60px;
+
+        a{
+          position: relative;
+          
+          &::after{
+            content:'';
+            display: block;
+            height: 1px;
+            width: 0%;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 3px);
+            background-color: #ccc;
+          }
+          &:hover::after{
+            transition: all 0.3s ease;
+            width: 150%;
+          }
+        }
       }
 
       .footer__media {
