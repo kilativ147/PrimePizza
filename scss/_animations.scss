@@ -1,0 +1,24 @@
+.animation-left, .animation-right, .animation-bottom, .animation-show{
+  position: relative;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+  
+}
+.animation-left{
+  transform: translate(-100%, 0);
+}
+.animation-right {
+  transform: translate(100%, 0);
+}
+.animation-bottom{
+  transform: translate(0, 20%);
+}
+.animation-show{
+  transform: translate(0, 40px);
+  // transition: all 5s ease;
+}
+
+._activeAnimation {
+  transform: translate(0, 0);
+  opacity: 1;
+}

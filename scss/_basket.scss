@@ -55,21 +55,24 @@
 
 .basket {
   position: fixed;
-  top: 0;
-  right: -500px;
+  top: -120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 20;
-  min-width: 350px;
-  max-width: 500px;
-  height: 100%;
+  min-width: 320px;
+  max-height: 90%;
+  overflow: hidden;
   background-color: #fff;
   box-shadow: 0px 0px 20px rgba(147, 158, 180, 0.5);
-  padding: 25px;
-  transition: all 1s ease;
+  border-radius: 20px;
+  opacity: 1;
+  padding: 30px 50px;
+  transition: all 0.35s ease;
 
   &._activeBasket {
-    right: 0;
-    transition: all 0.35s ease;
-    // transition: all 3s ease;
+    top: 50%;
+    opacity: 1;
+    transition: all 0.5s ease;
   }
 
   .basket__close {
@@ -104,64 +107,109 @@
   }
 
   .basket__form {
-    // height: 100%;
-    // display: grid;
-    // grid-template-rows: 75px 1fr 40px 50px;
-
+    display: flex;
+    flex-direction: column;
 
     h4 {
+      flex: 0 0;
+
+      height: 28px;
       font-size: 24px;
-      line-height: 130%;
+      line-height: 28px;
       font-weight: 700;
       padding-bottom: 20px;
       margin-bottom: 25px;
       border-bottom: 1px solid #ddd;
     }
 
-    .basket__list {
-      // overflow-y: scroll;
-      // overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .basket__list-content {
 
-      padding-bottom: 20px;
-      margin-bottom: 25px;
-      border-bottom: 1px solid #ddd;
+      .basket__list {
 
-      li {
-        display: grid;
-        grid-auto-flow: column;
-        grid-column-gap: 5px;
-        grid-template-columns: 1fr 15px 20px 15px 40px 30px 10px;
-        align-items: center;
-        // align-content: center;
+        max-height: 60vh;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0px 5px 0px;
+        margin-bottom: 20px;
 
-        .item__name {
-          // max-width: 100px;
-          // text-overflow: ellipsis;
+        //кастомізація скролу
+        &::-webkit-scrollbar {
+          width: 5px;
+          /* Ширина скрол-бара */
         }
 
-        .basket__item-button {
-          display: block;
-          width: 15px;
-          height: 15px;
-          background-color: transparent;
-          border-radius: 50%;
-          border: 1px solid #999;
-          display: flex;
+        &::-webkit-scrollbar-thumb {
+          background-color: #be940734;
+          /* Колір палички скрол-бара */
+          border-radius: 4px;
+          /* Радіус кутів палички скрол-бара */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: #f0a910e1;
+          /* Колір палички скрол-бара при наведенні */
+        }
+
+        //Стилізація скрол-бара для Firefox
+        scrollbar-width: 5px;
+        /* Ширина скрол-бара */
+        scrollbar-color: #be940734;
+        /* Колір палички скрол-бара та фону */
+
+        li {
+          max-height: 150px;
+          display: grid;
+          grid-auto-flow: column;
+          grid-column-gap: 5px;
+          grid-template-columns: 100px 1fr 15px 20px 15px 40px 30px 10px;
           align-items: center;
-          justify-content: center;
-        }
+          margin: 5px 0;
+          padding-bottom: 3px;
+          border-bottom: 1px solid #dddddd56;
 
-        .item__count {
-          text-align: center;
-        }
+          >div {
+            border-radius: 5px 0 0 5px;
+            overflow: hidden;
 
-        .item__summ {
-          text-align: right;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
 
-          span {}
+          .item__name {}
+
+          .basket__item-button {
+            display: block;
+            width: 15px;
+            height: 15px;
+            line-height: 1;
+            background-color: transparent;
+            border-radius: 50%;
+            border: 1px solid #999;
+          }
+
+          .item__count {
+            text-align: center;
+          }
+
+          .item__summ {
+            text-align: right;
+
+            span {}
+          }
+
+          @media (max-width: 400px) {
+            grid-template-columns: 0px 1fr 15px 20px 15px 40px 30px 10px;
+          }
+          @media (max-width: 400px) and (max-height: 700px) {
+            grid-template-columns: 0px 1fr 15px 20px 15px 40px 30px 10px;
+          }
+          @media (max-width: 700px) and (max-height: 400px){
+            grid-template-columns: 0px 1fr 15px 20px 15px 40px 30px 10px;
+          }
         }
       }
     }
@@ -186,6 +234,64 @@
       line-height: 100%;
       color: #fff;
       border-radius: 50px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    padding: 20px;
+  }
+
+  @media (max-height: 900px) {
+    .basket__form {
+      .basket__list-content {
+        .basket__list {
+          margin-bottom: 10px;
+          max-height: 50vh;
+        }
+      }
+    }
+  }
+
+  @media (max-height: 700px) {
+    .basket__form {
+      h4 {
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
+
+      .basket__list-content {
+        .basket__list {
+          margin-bottom: 10px;
+          max-height: 50vh;
+        }
+
+      }
+
+      .basket__summ {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  @media (max-height: 550px) {
+    .basket__form {
+      .basket__list-content {
+        .basket__list {
+          margin-bottom: 10px;
+          max-height: 40vh;
+        }
+      }
+    }
+  }
+
+  @media (max-height: 400px) {
+    .basket__form {
+      .basket__list-content {
+        .basket__list {
+          margin-bottom: 10px;
+          max-height: 30vh;
+        }
+      }
     }
   }
 }

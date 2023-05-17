@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
 * {
   padding: 0;
@@ -94,8 +95,7 @@ body {
 
 .wraper {
   position: relative;
-  height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -1288,20 +1288,24 @@ body {
 }
 .wraper .basket {
   position: fixed;
-  top: 0;
-  right: -500px;
+  top: -120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 20;
-  min-width: 350px;
-  max-width: 500px;
-  height: 100%;
+  min-width: 320px;
+  max-height: 90%;
+  overflow: hidden;
   background-color: #fff;
   box-shadow: 0px 0px 20px rgba(147, 158, 180, 0.5);
-  padding: 25px;
-  transition: all 1s ease;
+  border-radius: 20px;
+  opacity: 1;
+  padding: 30px 50px;
+  transition: all 0.35s ease;
 }
 .wraper .basket._activeBasket {
-  right: 0;
-  transition: all 0.35s ease;
+  top: 50%;
+  opacity: 1;
+  transition: all 0.5s ease;
 }
 .wraper .basket .basket__close {
   position: absolute;
@@ -1329,45 +1333,96 @@ body {
 .wraper .basket .basket__close::after {
   transform: rotate(45deg) translateX(-10%);
 }
+.wraper .basket .basket__form {
+  display: flex;
+  flex-direction: column;
+}
 .wraper .basket .basket__form h4 {
+  flex: 0 0;
+  height: 28px;
   font-size: 24px;
-  line-height: 130%;
+  line-height: 28px;
   font-weight: 700;
   padding-bottom: 20px;
   margin-bottom: 25px;
   border-bottom: 1px solid #ddd;
 }
-.wraper .basket .basket__form .basket__list {
+.wraper .basket .basket__form .basket__list-content .basket__list {
+  max-height: 60vh;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-bottom: 20px;
-  margin-bottom: 25px;
-  border-bottom: 1px solid #ddd;
+  padding: 0px 5px 0px;
+  margin-bottom: 20px;
+  scrollbar-width: 5px;
+  /* Ширина скрол-бара */
+  scrollbar-color: rgba(190, 148, 7, 0.2039215686);
+  /* Колір палички скрол-бара та фону */
 }
-.wraper .basket .basket__form .basket__list li {
+.wraper .basket .basket__form .basket__list-content .basket__list::-webkit-scrollbar {
+  width: 5px;
+  /* Ширина скрол-бара */
+}
+.wraper .basket .basket__form .basket__list-content .basket__list::-webkit-scrollbar-thumb {
+  background-color: rgba(190, 148, 7, 0.2039215686);
+  /* Колір палички скрол-бара */
+  border-radius: 4px;
+  /* Радіус кутів палички скрол-бара */
+}
+.wraper .basket .basket__form .basket__list-content .basket__list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(240, 169, 16, 0.8823529412);
+  /* Колір палички скрол-бара при наведенні */
+}
+.wraper .basket .basket__form .basket__list-content .basket__list li {
+  max-height: 150px;
   display: grid;
   grid-auto-flow: column;
   grid-column-gap: 5px;
-  grid-template-columns: 1fr 15px 20px 15px 40px 30px 10px;
+  grid-template-columns: 100px 1fr 15px 20px 15px 40px 30px 10px;
   align-items: center;
+  margin: 5px 0;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(221, 221, 221, 0.337254902);
 }
-.wraper .basket .basket__form .basket__list li .basket__item-button {
+.wraper .basket .basket__form .basket__list-content .basket__list li > div {
+  border-radius: 5px 0 0 5px;
+  overflow: hidden;
+}
+.wraper .basket .basket__form .basket__list-content .basket__list li > div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.wraper .basket .basket__form .basket__list-content .basket__list li .basket__item-button {
   display: block;
   width: 15px;
   height: 15px;
+  line-height: 1;
   background-color: transparent;
   border-radius: 50%;
   border: 1px solid #999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.wraper .basket .basket__form .basket__list li .item__count {
+.wraper .basket .basket__form .basket__list-content .basket__list li .item__count {
   text-align: center;
 }
-.wraper .basket .basket__form .basket__list li .item__summ {
+.wraper .basket .basket__form .basket__list-content .basket__list li .item__summ {
   text-align: right;
+}
+@media (max-width: 400px) {
+  .wraper .basket .basket__form .basket__list-content .basket__list li {
+    grid-template-columns: 0px 1fr 15px 20px 15px 40px 30px 10px;
+  }
+}
+@media (max-width: 400px) and (max-height: 700px) {
+  .wraper .basket .basket__form .basket__list-content .basket__list li {
+    grid-template-columns: 0px 1fr 15px 20px 15px 40px 30px 10px;
+  }
+}
+@media (max-width: 700px) and (max-height: 400px) {
+  .wraper .basket .basket__form .basket__list-content .basket__list li {
+    grid-template-columns: 0px 1fr 15px 20px 15px 40px 30px 10px;
+  }
 }
 .wraper .basket .basket__form .basket__summ {
   text-align: right;
@@ -1385,6 +1440,42 @@ body {
   line-height: 100%;
   color: #fff;
   border-radius: 50px;
+}
+@media (max-width: 800px) {
+  .wraper .basket {
+    padding: 20px;
+  }
+}
+@media (max-height: 900px) {
+  .wraper .basket .basket__form .basket__list-content .basket__list {
+    margin-bottom: 10px;
+    max-height: 50vh;
+  }
+}
+@media (max-height: 700px) {
+  .wraper .basket .basket__form h4 {
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  .wraper .basket .basket__form .basket__list-content .basket__list {
+    margin-bottom: 10px;
+    max-height: 50vh;
+  }
+  .wraper .basket .basket__form .basket__summ {
+    margin-bottom: 20px;
+  }
+}
+@media (max-height: 550px) {
+  .wraper .basket .basket__form .basket__list-content .basket__list {
+    margin-bottom: 10px;
+    max-height: 40vh;
+  }
+}
+@media (max-height: 400px) {
+  .wraper .basket .basket__form .basket__list-content .basket__list {
+    margin-bottom: 10px;
+    max-height: 30vh;
+  }
 }
 .wraper .footer {
   background-color: #262626;
@@ -1482,4 +1573,31 @@ body {
     flex-direction: column;
     row-gap: 15px;
   }
+}
+
+.animation-left, .animation-right, .animation-bottom, .animation-show {
+  position: relative;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.animation-left {
+  transform: translate(-100%, 0);
+}
+
+.animation-right {
+  transform: translate(100%, 0);
+}
+
+.animation-bottom {
+  transform: translate(0, 20%);
+}
+
+.animation-show {
+  transform: translate(0, 40px);
+}
+
+._activeAnimation {
+  transform: translate(0, 0);
+  opacity: 1;
 }

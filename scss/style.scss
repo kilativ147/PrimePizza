@@ -32,8 +32,8 @@ body{
 
 .wraper {
   position: relative;
-  height: 100%;
-  overflow-x: hidden;
+  // height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   
@@ -53,4 +53,6 @@ body{
   }
   @import "_basket";
   @import "_footer";
+
 }
+@import "_animations";
