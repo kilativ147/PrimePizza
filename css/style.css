@@ -230,11 +230,13 @@ body {
 @media (max-width: 800px) {
   .wraper .header__container .header__content {
     position: fixed;
-    bottom: 0;
+    z-index: -1;
+    top: 0;
     right: -100%;
     padding-top: 30px;
     width: 100%;
-    height: calc(100% - 100px);
+    height: 100%;
+    padding-top: 100px;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
@@ -1249,11 +1251,13 @@ body {
   padding: 10px;
   cursor: pointer;
   opacity: 0;
+  visibility: hidden;
   transition: all 0.3s ease;
 }
 .wraper .basket__cart._activeCard {
   right: calc(0% + 30px);
   opacity: 1;
+  visibility: visible;
 }
 .wraper .basket__cart .cart__image {
   position: absolute;
