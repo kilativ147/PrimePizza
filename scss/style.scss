@@ -28,7 +28,9 @@ body{
   line-height: 150%; /* 24/16 */
   color: #262626;
 }
-
+body._lock{
+    overflow: hidden !important;
+}
 
 .wraper {
   position: relative;
