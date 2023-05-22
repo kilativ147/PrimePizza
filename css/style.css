@@ -1242,7 +1242,7 @@ body {
 .wraper .basket__cart {
   position: fixed;
   top: 30%;
-  right: calc(0% + 30px);
+  right: -30%;
   z-index: 19;
   width: 75px;
   height: 75px;
@@ -1252,6 +1252,7 @@ body {
   transition: all 0.3s ease;
 }
 .wraper .basket__cart._activeCard {
+  right: calc(0% + 30px);
   opacity: 1;
 }
 .wraper .basket__cart .cart__image {
@@ -1444,6 +1445,9 @@ body {
 @media (max-width: 800px) {
   .wraper .basket {
     padding: 20px;
+  }
+  .wraper .basket .basket__close {
+    top: 25px;
   }
 }
 @media (max-height: 900px) {

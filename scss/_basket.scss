@@ -1,7 +1,7 @@
 .basket__cart {
   position: fixed;
   top: 30%;
-  right: calc(0% + 30px);
+  right: -30%;
   z-index: 19;
   width: 75px;
   height: 75px;
@@ -11,6 +11,7 @@
   transition: all 0.3s ease;
 
   &._activeCard {
+    right: calc(0% + 30px);
     opacity: 1;
   }
 
@@ -239,6 +240,9 @@
 
   @media (max-width: 800px) {
     padding: 20px;
+    .basket__close {
+      top: 25px;
+    }
   }
 
   @media (max-height: 900px) {

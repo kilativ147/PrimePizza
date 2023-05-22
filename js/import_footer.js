@@ -1,4 +1,4 @@
-fetch('/html_assets/footer.html')
+fetch('html_assets/footer.html')
 					.then(response => response.text())
 					.then(html => {
 						// Створюємо div елемент, в який будемо вставляти HTML

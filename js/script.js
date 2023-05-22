@@ -1,4 +1,4 @@
-//Список картини
+//Список карзини
 var cartList = {}
 var cartListPrice = {}
 
